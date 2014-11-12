@@ -19,5 +19,9 @@
 
     // Configure the view for the selected state
 }
-
+- (void)layoutSubviews
+{
+    self.Label.preferredMaxLayoutWidth = CGRectGetWidth(self.bounds);
+    [super layoutSubviews];
+}
 @end

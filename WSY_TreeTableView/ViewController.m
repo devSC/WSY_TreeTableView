@@ -6,6 +6,12 @@
 //  Copyright (c) 2014年 wilson. All rights reserved.
 //
 
+//ios7上解决问题
+//https://github.com/caoimghgin/TableViewCellWithAutoLayout
+//autoLayout
+//https://github.com/smileyborg/UIView-AutoLayout
+//see this
+//http://stackoverflow.com/questions/23496547/autolayout-uitableviewcell-in-landscape-and-on-ipad-calculating-height-based-on/23505951#23505951
 #import "ViewController.h"
 #import "WSYHeaderView.h"
 #import "WSYAutoSizeCell.h"
@@ -147,6 +153,29 @@
         _openSection = -1;
         [self.tableView reloadData];
     }
+
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // assumes all cells are of the same type!
+    static UITableViewCell* cell;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        cell = [tableView dequeueReusableCellWithIdentifier: @"WSYAutoSizeCell"];
+    });
+    
+    // size the cell for the current orientation.  assume's we're full screen width:
+    cell.frame = CGRectMake(0, 0, tableView.bounds.size.width, cell.frame.size.height );
+    
+    // perform a cell layout - this runs autolayout and also updates any preferredMaxLayoutWidths via layoutSubviews in our subclassed UILabels
+    [cell layoutIfNeeded];
+    
+    // finally calculate the required height:
+    CGSize s = [cell.contentView systemLayoutSizeFittingSize: UILayoutFittingCompressedSize];
+    
+    return s.height + 1; // +1 because the contentView is 1pt shorter than the cell itself when there's a separator.  If no separator you shouldn't need +1
 
 }
 @end
