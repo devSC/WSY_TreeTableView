@@ -20,7 +20,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="b6W-eu-nMa"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -33,7 +33,7 @@
                         <action selector="wsyHeaderViewDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="4Uk-pu-7Lq"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="buddy_header_arrow_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qix-RZ-Brg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buddy_header_arrow_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qix-RZ-Brg">
                     <rect key="frame" x="8" y="18" width="14" height="14"/>
                 </imageView>
             </subviews>
