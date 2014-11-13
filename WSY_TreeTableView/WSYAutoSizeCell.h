@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface WSYAutoSizeCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *Label;
-@property (weak, nonatomic) IBOutlet UIView *cornerView;
+@property (strong, nonatomic) IBOutlet UILabel *bodyLabel;
+@property (strong, nonatomic) UIView *whiteView;
+
+//@property (weak, nonatomic) IBOutlet UILabel *Label;
+//@property (weak, nonatomic) IBOutlet UIView *cornerView;
+- (void)updateFonts;
 
 
 @end
