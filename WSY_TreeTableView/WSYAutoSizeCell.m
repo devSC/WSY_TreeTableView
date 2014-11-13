@@ -131,6 +131,11 @@
 //        [self.titleLabel setTextColor:[UIColor blackColor]];
 //        self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.1];
         self.contentView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.2];
+        
+        self.iconView = [UIImageView newAutoLayoutView];
+        [self.iconView setImage:[UIImage imageNamed:@"icon"]];
+        [self.iconView.layer setCornerRadius:5.0f];
+        
         self.whiteView = [UIView newAutoLayoutView];
         self.whiteView.layer.cornerRadius = 5.0;
         [self.whiteView setBackgroundColor:[UIColor whiteColor]];
@@ -141,15 +146,14 @@
         [self.bodyLabel setNumberOfLines:0];
         [self.bodyLabel setTextAlignment:NSTextAlignmentLeft];
         [self.bodyLabel setTextColor:[UIColor darkGrayColor]];
-        
-//        self.bodyLabel.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.1];
-        
-        
+        self.bodyLabel.font = [UIFont fontWithName:@"Avenir Light" size:16];
+
 //        self.contentView.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.1];
-        
 //        [self.contentView addSubview:self.titleLabel];
+        
         [self.contentView addSubview:_whiteView];
         [self.contentView addSubview:self.bodyLabel];
+        [self.contentView addSubview:_iconView];
         [self updateFonts];
     }
     
@@ -186,16 +190,19 @@
         [self.whiteView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets-2];
         [self.whiteView autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets-2];
         [self.whiteView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:kLabelVerticalInsets-2];
-
         
+//        [UIView autoSetPriority:UILayoutPriorityRequired forConstraints:^{
+//            [self.bodyLabel autoSetContentCompressionResistancePriorityForAxis:ALAxisVertical];
+//        }];
+//        [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:kLabelVerticalInsets];
+//        [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
+//        [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
+//        [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:kLabelVerticalInsets];
         
-        [UIView autoSetPriority:UILayoutPriorityRequired forConstraints:^{
-            [self.bodyLabel autoSetContentCompressionResistancePriorityForAxis:ALAxisVertical];
-        }];
-        [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:kLabelVerticalInsets];
-        [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
-        [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
-        [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:kLabelVerticalInsets];
+        NSDictionary *visiableView = NSDictionaryOfVariableBindings(_iconView, _bodyLabel, _whiteView);
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-12-[_iconView(60)]-5-[_bodyLabel]-12-|" options:0 metrics:0 views:visiableView]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_iconView(60)]" options:0 metrics:0 views:visiableView]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-12-[_bodyLabel]-12-|" options:0 metrics:0 views:visiableView]];
         
         self.didSetupConstraints = YES;
     }
@@ -220,7 +227,7 @@
 - (void)updateFonts
 {
 //    self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    self.bodyLabel.font = [UIFont fontWithName:@"Avenir Light" size:16];
+//    self.bodyLabel.font = [UIFont fontWithName:@"Avenir Light" size:16];
 }
 
 

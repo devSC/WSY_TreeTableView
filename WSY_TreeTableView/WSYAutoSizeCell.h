@@ -10,8 +10,9 @@
 
 @interface WSYAutoSizeCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-
 @property (strong, nonatomic) IBOutlet UILabel *bodyLabel;
+
+@property (strong, nonatomic) UIImageView *iconView;
 @property (strong, nonatomic) UIView *whiteView;
 
 //@property (weak, nonatomic) IBOutlet UILabel *Label;

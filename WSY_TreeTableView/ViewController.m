@@ -47,9 +47,9 @@
     self.tableView.allowsSelection = NO;
 
     
-    NSString *string = @"Love your parents. We are too busy growing up yet we forget that they are already growing old \n多关心一下自己的父母吧，我们总忙着自己成长，却忘了他们也在变老。";
+    NSString *string = @"Love your parents. We are too busy growing up yet we forget that they are already growing old \n多关心一下自己的父母吧，我们总忙着自己成长，却忘了他们也在变老。https://twitter.com";
     
-   NSString *string2 = @" The moment you think about giving up,think of the reason why you held on so long\n每当你想放弃的时候，想一想是什么支撑着你一路坚持.";
+   NSString *string2 = @" The moment you think about giving up,think of the reason why you held on so long\n每当你想放弃的时候，想一想是什么支撑着你一路坚持. https://twitter.com";
     
     
     NSString *string3 = @" I don't wanna be your 'number one' that implies there are a number two and maybe a number three. I want to be your only one\n我不想做你的“第一”，因为那就意味着还有第二，第三……我只想做你的“唯一”。";
@@ -119,7 +119,7 @@
     [NSDataDetector dataDetectorWithTypes:(NSTextCheckingTypes)NSTextCheckingTypeLink | NSTextCheckingTypePhoneNumber
                                     error:&error];
     NSArray *matches = [detector matchesInString:content
-                                         options:0
+                                                            options:0
                                            range:NSMakeRange(0, [content length])];
     for (NSTextCheckingResult *match in matches) {
         
@@ -181,11 +181,12 @@
     // it in the dictionary if one hasn't already been added for the reuse identifier.
     // WARNING: Don't call the table view's dequeueReusableCellWithIdentifier: method here because this will result
     // in a memory leak as the cell is created but never returned from the tableView:cellForRowAtIndexPath: method!
-    WSYAutoSizeCell *cell = [self.offscreenCells objectForKey:reuseIdentifier];
-    if (!cell) {
-        cell = [[WSYAutoSizeCell alloc] init];
-        [self.offscreenCells setObject:cell forKey:reuseIdentifier];
-    }
+//    WSYAutoSizeCell *cell = [self.offscreenCells objectForKey:reuseIdentifier];
+//    if (!cell) {
+//        cell = [[WSYAutoSizeCell alloc] init];
+//        [self.offscreenCells setObject:cell forKey:reuseIdentifier];
+//    }
+    WSYAutoSizeCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell for this indexPath
     [cell updateFonts];
